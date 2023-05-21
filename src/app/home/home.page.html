@@ -1,0 +1,72 @@
+<ion-header [translucent]="true">
+    <ion-toolbar class="ion-text-center">
+        <ion-title>
+            Actividad evaluativa eje 3
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <div class="content">
+        <ion-card class="content_data">
+            <ion-card-header class="title">
+                <ion-img src="../../assets/logo-areandina-pereira.png"></ion-img>
+            </ion-card-header>
+            <ion-card-content *ngIf="!show">
+                <ion-item>
+                    <ion-label color="medium" position="floating">
+                        Ingrese un nombre de usuario:
+                    </ion-label>
+                    <ion-input [(ngModel)]="usuario.usuario"></ion-input>
+                </ion-item>
+                <ion-item>
+                    <ion-label color="medium" position="floating">
+                        Ingrese una clave:
+                    </ion-label>
+                    <ion-input [(ngModel)]="usuario.clave"></ion-input>
+                </ion-item>
+                <ion-button (click)="addUser()" color="andina" shape="round" class="button" expand="full">
+                    Ingresar usuario
+                </ion-button>
+            </ion-card-content>
+            <ion-card-content *ngIf="show">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col class="ion-text-center">
+                            <ion-select [(ngModel)]="cifradoUser" (ionChange)="chageSimetrico()" interface="popover">
+                                <ion-select-option value="Simetrico" disabled>Simetrico</ion-select-option>
+                                <ion-select-option value="cesar">Cifrado Cesar</ion-select-option>
+                                <ion-select-option value="blowfish">Cifrado Blowfish</ion-select-option>
+                            </ion-select>
+                        </ion-col>
+                        <ion-col class="ion-text-center">
+                            <ion-select [(ngModel)]="cifradoPass" (ionChange)="chageAsimetrico()" value="Asimetrico" interface="popover">
+                                <ion-select-option value="Asimetrico" disabled>Asimetrico</ion-select-option>
+                                <ion-select-option value="rsa">Cifrado Rsa</ion-select-option>
+                            </ion-select>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col class="ion-text-center">
+                            <div class="textos">Usuarios</div>
+                        </ion-col>
+                        <ion-col class="ion-text-center">
+                            <div class="textos">Claves</div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row *ngFor="let u of usuarios">
+                        <ion-col class="ion-text-center">
+                            <div>{{u.usuario}}</div>
+                        </ion-col>
+                        <ion-col class="ion-text-center">
+                            <div>{{u.clave}}</div>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-card-content>
+            <ion-label class="ion-text-center">
+                <p (click)="show=!show" class="show">Ver mas</p>
+            </ion-label>
+        </ion-card>
+    </div>
+</ion-content>
